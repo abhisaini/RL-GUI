@@ -1,0 +1,101 @@
+body {font-family: Arial;}
+
+#container {
+	position: relative;
+	top: 30px;
+	outline:2px solid #000;
+	font-size: 0;
+	margin:auto;
+	height:720px;
+	width:720px;
+	padding: 0;
+	border: none;
+	margin-bottom: 50px;
+	/* bottom: 1300px; */
+
+	/* display: none; */
+}
+#containerO {
+	position: relative;
+	top: 30px;
+	outline:2px solid #000;
+	font-size: 0;
+	margin:auto;
+	height:720px;
+	width:720px;
+	padding: 0;
+	border: none;
+	bottom: 100px;
+}
+
+.grid {
+	margin:0;
+	padding:0;
+	border:none;
+	outline:1px solid #000;
+	display:inline-block;
+
+	font-size: 17px;
+	text-align: center;
+	vertical-align: middle;
+}
+
+
+.gridO {
+	margin:0;
+	padding:0;
+	text-align: center;
+	border:none;
+	color: black;
+	font-size: 30px;
+	text-align: center;
+	vertical-align: middle;
+	outline:1px solid #000;;
+	display:inline-block;
+}
+
+
+#footer{
+	position: fixed;
+	bottom: 0;
+	height:auto;
+	/* padding: 20px; */
+	width: 100%;
+	background-color: #f1f1f1;
+	left: -1px;
+	border: 2px solid #ccc;
+	/* outline-width: thick; */
+
+}
+#footer div{
+	margin-top: 20px;
+	cursor: pointer;
+	transition: 0.2s;
+	background-color: inherit;
+	float: left;
+	width: 50%;
+	margin: 0;
+	text-align: center;
+	padding-top: 30px;
+	padding-bottom: 30px;
+	outline-style: solid;
+	font-size: 17px;
+	color: rgb(80, 80, 80);
+	outline-width: thin;
+	outline-color: #ccc;
+	border: none;
+    /* outline: none; */
+}
+
+#footer div:hover{
+    background-color: #ddd;
+}
+
+#footer div.active{
+	background-color: #ccc;
+}
+
+#controller{
+	position: relative;
+	bottom: 100px;
+}

@@ -1,0 +1,80 @@
+<html>
+<html>
+
+<head>
+	<!-- <meta name="viewport" content="width=device-width, initial-scale=1"> -->
+
+	<link rel=stylesheet type="text/css" href=" {{ url_for('static', filename = 'style.css') }}"></">
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
+	<script type="text/javascript" src="  {{ url_for('static', filename = 'mousetrap.min.js') }}"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript" src=" {{ url_for('static', filename = 'script.js') }} "></script>
+	<script type="text/javascript" src=" {{ url_for('static', filename = 'optim.js') }} "></script>
+
+</head>
+
+<body>
+
+	<!-- <center><button class="newGrid">New Grid</button></center> -->
+
+	<div id="container"></div>
+
+	<br><br>
+	<div style="text-align:center;width:480px;	margin:auto;margin-top : 70px;" id="controller">
+		<button id="up" >UP</button><br><br>
+		<button id="left" >LEFT</button>
+		<button id="right" >RIGHT</button><br><br>
+		<button id="down" >DOWN</button>
+	</div>
+
+
+
+	<div id="containerO"></div>
+
+	<div id="footer">
+		 <div id="left-foot" onclick="switchOpt()"> Optimal Grid </div>
+		 <div id="right-foot" onclick="switchMy()">My Grid </div>
+	</div>
+
+</body>
+<script>
+gridsz = {{gridcount}};
+console.log({{grid}});
+console.log({{actions}});
+var myacs = {{actions}};
+var myGrid = {{grid}};
+console.log({{max}});
+var max_col = {{max}};
+// makeActions(myacs);
+// var movesaaa = [moveUp, moveRight, moveDown, moveLeft];
+// movesaaa[2]();
+
+
+	// single keys
+	// Mousetrap.bind('4', function() { console.log('4'); });
+	// Mousetrap.bind("?", function() { console.log('show shortcuts!'); });
+	// Mousetrap.bind('esc', function() { console.log('escape'); }, 'keyup');
+	//
+	// // combinations
+	// Mousetrap.bind('command+shift+k', function() { console.log('command shift k'); });
+	//
+	// // map multiple combinations to the same callback
+	// Mousetrap.bind(['command+k', 'ctrl+k'], function() {
+	//     console.log('command k or control k');
+	//
+	//     // return false to prevent default browser behavior
+	//     // and stop event from bubbling
+	//     return false;
+	// });
+	//
+	// // gmail style sequences
+	// Mousetrap.bind('g i', function() { console.log('go to inbox'); });
+	// Mousetrap.bind('* a', function() { console.log('select all'); });
+	//
+	// // konami code!
+	// Mousetrap.bind('up up down down left right left right b a enter', function() {
+	//     console.log('konami code');
+	// });
+</script>
+
+</html>
