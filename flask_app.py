@@ -31,6 +31,14 @@ def rewardSubmit():
         actions = request.args["actions"]
         some.insertSurvey(gridsz, actions, reward, time)
         return "1"
+
+@app.route('/show')
+def getSurvey():
+    if request.method == 'GET':
+        gridsz = request.args["gridsz"]
+        resp = some.showSurvey(gridsz)
+        return render_template('survey.html', resp = resp)
+
 if __name__ == '__main__':
     app.use_reloader = True
     app.run(debug = True)
