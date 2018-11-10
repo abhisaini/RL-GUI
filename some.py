@@ -32,7 +32,7 @@ def insertSurvey(gridsz, actions, reward, time):
 	return
 
 def showSurvey(grid_sz):
-	conn = sqlite3.connect('/home/alphago/mysitedatabase.db')
+	conn = sqlite3.connect('/home/alphago/mysite/database.db')
 	cur = conn.cursor()
 	cmd = "SELECT * FROM survey_resp WHERE gridsz=" + str(grid_sz)
 	cur.execute(cmd)
