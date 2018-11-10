@@ -9,7 +9,7 @@ def insertDB(grid_sz, grid_str, action_str):
 			tmp += [float(y)]
 		grid_nw += [tmp]
 	actions = [int(x) for x in action_str.strip().split(" ")]
-	conn = sqlite3.connect('database.db')
+	conn = sqlite3.connect('/home/alphago/mysite/database.db')
 	cur = conn.cursor()
 	cur.execute("INSERT INTO GRIDS (GRIDSZ ,PATH ,MATRIX) VALUES (?,?,?)",(grid_sz, str(actions), str(grid_nw)) )
 	conn.commit()
@@ -17,7 +17,7 @@ def insertDB(grid_sz, grid_str, action_str):
 
 
 def getGridDB(grid_sz):
-	conn = sqlite3.connect('database.db')
+	conn = sqlite3.connect('/home/alphago/mysite/database.db')
 	cur = conn.cursor()
 	cmd = "SELECT * FROM GRIDS WHERE GRIDSZ=" + str(grid_sz)
 	cur.execute(cmd)
@@ -25,14 +25,14 @@ def getGridDB(grid_sz):
 	return row
 
 def insertSurvey(gridsz, actions, reward, time):
-	conn = sqlite3.connect('database.db')
+	conn = sqlite3.connect('/home/alphago/mysite/database.db')
 	cur = conn.cursor()
 	cur.execute("INSERT INTO survey_resp (gridsz ,action ,reward, time) VALUES (?,?,?, ?)",(gridsz, actions, reward, time) )
 	conn.commit()
 	return
 
 def showSurvey(grid_sz):
-	conn = sqlite3.connect('database.db')
+	conn = sqlite3.connect('/home/alphago/mysite/database.db')
 	cur = conn.cursor()
 	cmd = "SELECT * FROM survey_resp WHERE gridsz=" + str(grid_sz)
 	cur.execute(cmd)
