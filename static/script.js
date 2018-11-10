@@ -1,13 +1,19 @@
 // function that builds a grid in the "container"
 var x_coord = 0, y_coord = 0, gridsz , prev_x = -1, prev_y = -1;
+var reward_total = 0.0;
+var myPath = [];
+var endflag = 0;
+var time_beg = new Date(), time_end;
+time_beg = time_beg.getTime();
 // #9c412e dark red
 function createGrid(x) {
     for (var rows = 0; rows < x; rows++) {
         for (var columns = 0; columns < x; columns++) {
             // console.log(max_col);
-            mycolor = 'rgb(' + (255 - myGrid[rows][columns]/max_col * 25) + ',' + (255 - myGrid[rows][columns]/max_col * 55) + ',' + (255 - myGrid[rows][columns]/max_col * 115) + ')';
-            // console.log(typeof mycolor);
-            $("#container").append("<div class='grid ' style = 'background-color:"+ mycolor+ "; '><p >" + myGrid[rows][columns] +"</p></div>");
+            mycolor = 'rgb(' + (240 - myGrid[rows][columns]/max_col * 75) + ',' + (234 - myGrid[rows][columns]/max_col * 105) + ',' + (222 - myGrid[rows][columns]/max_col * 165) + ')';
+            // console.log( mycolor);
+            // $("#container").append("<div class='grid ' style = 'background-color:"+ mycolor+ "; '><p >" + myGrid[rows][columns] +"</p></div>");
+            $("#container").append("<div class='grid ' style = 'background-color:"+ mycolor+ "; '></div>");
         };
     };
     $(".grid").width(720/x);
@@ -82,7 +88,30 @@ function color(i, j, gridsize, color, gtype, m){
 
 
 function checkEnd() {
-    if(x_coord == gridsz - 1 && y_coord == gridsz - 1){
+    if (x_coord == gridsz - 1 && y_coord == gridsz - 1 && endflag > 0){
+        alert("Cannot move now, reached the end.");
+        console.log("end");
+        return 1;
+    }
+    else if (x_coord == gridsz - 1 && y_coord == gridsz - 1 && endflag == 0 ) {
+        endflag = 1;
+
+        time_end = new Date();
+        time_end = time_end.getTime();
+        var time_elapse = Math.round((time_end - time_beg) / 1000) ;
+
+        var xhttp = new XMLHttpRequest();
+        xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+               // Typical action to be performed when the document is ready:
+               console.log( xhttp.responseText);
+            }
+        };
+        var url = "http://localhost:5000/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total ;
+        console.log(url);
+        xhttp.open("GET", url , true);
+        xhttp.send();
+
         alert("Cannot move now, reached the end.");
         console.log("end");
         return 1;
@@ -98,10 +127,14 @@ function moveUp() {
 	}
 	else{
         if(!checkEnd()){
+            myPath.push(0);
     		y_coord --;
+            reward_total += myGrid[y_coord][x_coord] ;
+            // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
     		color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
             prev_x = x_coord, prev_y = y_coord;
+            checkEnd();
         }
 
 	}
@@ -114,10 +147,14 @@ function moveDown() {
 	}
 	else{
         if(!checkEnd()){
-		y_coord ++;
-        color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
-        color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
-        prev_x = x_coord, prev_y = y_coord;
+            myPath.push(1);
+    		y_coord ++;
+            reward_total += myGrid[y_coord][x_coord] ;
+            // console.log(myGrid[y_coord][x_coord]);
+            color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
+            color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
+            prev_x = x_coord, prev_y = y_coord;
+            checkEnd();
         }
     }
 }
@@ -129,24 +166,35 @@ function moveRight() {
 	}
 	else{
         if(!checkEnd()){
-		x_coord ++;
-        color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
-        color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
-        prev_x = x_coord, prev_y = y_coord;	}
+            myPath.push(2);
+    		x_coord ++;
+            reward_total += myGrid[y_coord][x_coord] ;
+            // console.log(myGrid[y_coord][x_coord]);
+            color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
+            color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
+            prev_x = x_coord, prev_y = y_coord;
+            checkEnd();
+        }
     }
 }
 
 function moveLeft() {
+
 	if(x_coord == 0){
 		alert("invalid move") ;
 		console.log("invalid move");
 	}
 	else{
         if(!checkEnd()){
-		x_coord --;
-        color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
-        color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
-        prev_x = x_coord, prev_y = y_coord;	}
+            myPath.push(3);
+    		x_coord --;
+            reward_total += myGrid[y_coord][x_coord] ;
+            // console.log(myGrid[y_coord][x_coord]);
+            color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
+            color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
+            prev_x = x_coord, prev_y = y_coord;
+            checkEnd();
+        }
     }
 }
 
@@ -165,6 +213,7 @@ $(document).ready(function() {
 
 	color(x_coord ,y_coord ,gridsz, "#98e778", ".grid");
     prev_x = 0, prev_y = 0;
+    reward_total += myGrid[0][0];
     color(gridsz-1 ,gridsz-1 ,gridsz, "#ea8d7a", ".grid");
     color(0,0,gridsz, "#e6c889", ".gridO");
     color(gridsz-1, gridsz-1,gridsz, "#e6c889", ".gridO");

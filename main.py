@@ -22,7 +22,15 @@ def getGrid():
         print(max(grid))
         return render_template('grid.html', gridcount = gridcount, actions = actions, grid = grid, max = findMax(grid))
 
-
+@app.route('/survey')
+def rewardSubmit():
+    if request.method == 'GET':
+        gridsz = request.args["gridsz"]
+        time = request.args["time"]
+        reward = request.args["reward"]
+        actions = request.args["actions"]
+        some.insertSurvey(gridsz, actions, reward, time)
+        return "1"
 if __name__ == '__main__':
     app.use_reloader = True
     app.run(debug = True)

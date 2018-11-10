@@ -24,6 +24,20 @@ def getGridDB(grid_sz):
 	row = cur.fetchone()
 	return row
 
+def insertSurvey(gridsz, actions, reward, time):
+	conn = sqlite3.connect('database.db')
+	cur = conn.cursor()
+	cur.execute("INSERT INTO survey_resp (gridsz ,action ,reward, time) VALUES (?,?,?, ?)",(gridsz, actions, reward, time) )
+	conn.commit()
+	return
+
+def showSurvey(grid_sz):
+	conn = sqlite3.connect('database.db')
+	cur = conn.cursor()
+	cmd = "SELECT * FROM survey_resp WHERE gridsz=" + str(grid_sz)
+	cur.execute(cmd)
+	row = cur.fetchall()
+	return row
 # CREATE TABLE GRIDS (GRIDSZ PRIMARY INT , PATH TEXT, MATRIX TEXT)
 
 '''
