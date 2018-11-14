@@ -46,6 +46,40 @@ var myacs = {{actions}};
 var myGrid = {{grid}};
 console.log({{max}});
 var max_col = {{max}};
+var scene = {{scene}};
+var x_end, y_end;
+switch (scene) {
+
+	case 1:
+		x_coord = 0, y_coord = 0;
+		x_end = 9, y_end = 9;
+		prev_x = -1, prev_y = -1;
+		break;
+	case 3:
+		x_coord = 9, y_coord = 0;
+		x_end = 0, y_end = 9;
+		prev_x = 10, prev_y = -1;
+		break;
+	case 2:
+		x_coord = 0, y_coord = 9;
+		x_end = 9, y_end = 0;
+		prev_x = -1, prev_y = 10;
+		break;
+	case 4:
+		x_coord = 9, y_coord = 9;
+		x_end = 0, y_end = 0;
+		prev_x = 10, prev_y = 10;
+
+		break;
+	case 5:
+		x_coord = 0, y_coord = 0;
+		x_end = 0, y_end = 9;
+		prev_x = -1, prev_y = -1;
+
+		break;
+	default:
+
+}
 // makeActions(myacs);
 // var movesaaa = [moveUp, moveRight, moveDown, moveLeft];
 // movesaaa[2]();

@@ -1,5 +1,5 @@
 // function that builds a grid in the "container"
-var x_coord = 0, y_coord = 0, gridsz , prev_x = -1, prev_y = -1;
+var x_coord , y_coord, gridsz , prev_x , prev_y ;
 var reward_total = 0.0;
 var myPath = [];
 var endflag = 0;
@@ -88,12 +88,12 @@ function color(i, j, gridsize, color, gtype, m){
 
 
 function checkEnd() {
-    if (x_coord == gridsz - 1 && y_coord == gridsz - 1 && endflag > 0){
+    if (x_coord == x_end && y_coord == y_end && endflag > 0){
         alert("Cannot move now, reached the end.");
         console.log("end");
         return 1;
     }
-    else if (x_coord == gridsz - 1 && y_coord == gridsz - 1 && endflag == 0 ) {
+    else if (x_coord == x_end && y_coord == y_end && endflag == 0 ) {
         endflag = 1;
 
         time_end = new Date();
@@ -107,13 +107,14 @@ function checkEnd() {
                console.log( xhttp.responseText);
             }
         };
-        var url = "http://alphago.pythonanywhere.com/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total ;
+        var url = "http://localhost:5000/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene;
         console.log(url);
         xhttp.open("GET", url , true);
         xhttp.send();
 
-        alert("Cannot move now, reached the end.");
+        alert("Cannot move now, reached the end.Exiting to previous page.");
         console.log("end");
+        window.location = "/";
         return 1;
     }
     return 0;
@@ -122,14 +123,16 @@ function checkEnd() {
 
 function moveUp() {
 	if(y_coord == 0){
-		alert("invalid move") ;
-		console.log("invalid move");
+        console.log(y_coord, x_coord);
+		alert("invalid move up") ;
+		console.log("invalid move up");
 	}
 	else{
         if(!checkEnd()){
             myPath.push(0);
     		y_coord --;
             reward_total += myGrid[y_coord][x_coord] ;
+            myGrid[y_coord][x_coord] = 0;
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
     		color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
@@ -142,8 +145,8 @@ function moveUp() {
 
 function moveDown() {
 	if(y_coord == gridsz - 1){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move down") ;
+		console.log("invalid move down");
 	}
 	else{
         if(!checkEnd()){
@@ -161,8 +164,8 @@ function moveDown() {
 
 function moveRight() {
 	if(x_coord == gridsz - 1){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move right") ;
+		console.log("invalid move right");
 	}
 	else{
         if(!checkEnd()){
@@ -181,8 +184,8 @@ function moveRight() {
 function moveLeft() {
 
 	if(x_coord == 0){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move left") ;
+		console.log("invalid move left");
 	}
 	else{
         if(!checkEnd()){
@@ -208,15 +211,16 @@ $(document).ready(function() {
 
 
 	createGrid(gridsz);
-    createGridO(gridsz);
+    // createGridO(gridsz);
 
 
-	color(x_coord ,y_coord ,gridsz, "#98e778", ".grid");
-    prev_x = 0, prev_y = 0;
-    reward_total += myGrid[0][0];
-    color(gridsz-1 ,gridsz-1 ,gridsz, "#ea8d7a", ".grid");
-    color(0,0,gridsz, "#e6c889", ".gridO");
-    color(gridsz-1, gridsz-1,gridsz, "#e6c889", ".gridO");
+	color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
+    // console.log("aaa : ", y_coord ,x_coord);
+    prev_x = x_coord, prev_y = y_coord;
+    reward_total += myGrid[y_coord][x_coord];
+    color(y_end ,x_end,gridsz, "#ea8d7a", ".grid");
+    // color(0,0,gridsz, "#e6c889", ".gridO");
+    // color(y_end, x_end,gridsz, "#e6c889", ".gridO");
 
 
 	Mousetrap.bind('up', function(e) {
@@ -249,7 +253,7 @@ $(document).ready(function() {
         // console.log(typeof this);
 	});
 
-    makeActions(myacs);
+    // makeActions(myacs);
 
 
 

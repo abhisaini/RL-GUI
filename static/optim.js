@@ -27,8 +27,8 @@ function mark(i,j,m) {
 }
 function moveUpO() {
 	if(oy_coord == 0){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move by agent ") ;
+		console.log("invalid move by agent ");
 	}
 	else{
 		oy_coord --;
@@ -43,8 +43,8 @@ function moveUpO() {
 
 function moveDownO() {
 	if(oy_coord == gridsz - 1){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move by agent ") ;
+		console.log("invalid move by agent ");
 	}
 	else{
 		oy_coord ++;
@@ -58,8 +58,8 @@ function moveDownO() {
 
 function moveRightO() {
 	if(ox_coord == gridsz - 1){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move by agent ") ;
+		console.log("invalid move by agent ");
 	}
 	else{
 		ox_coord ++;
@@ -73,8 +73,8 @@ function moveRightO() {
 
 function moveLeftO() {
 	if(ox_coord == 0){
-		alert("invalid move") ;
-		console.log("invalid move");
+		alert("invalid move by agent ") ;
+		console.log("invalid move by agent ");
 	}
 	else{
 		ox_coord --;
@@ -89,6 +89,7 @@ function moveLeftO() {
 
 
 function makeActions(actions){
+	console.log(y_coord, x_coord);
 	for(x = 0; x < actions.length; x++){
 		switch (actions[x]) {
 			case 0:
@@ -112,7 +113,8 @@ function makeActions(actions){
 		}
 	}
 	var grid = $(".gridO") ;
-	grid.children()[gridsz*gridsz - 1].classList.add("fa-flag-checkered") ;
+	console.log("check : ", y_end * gridsz + x_end);
+	grid.children()[y_end * gridsz + x_end].classList.add("fa-flag-checkered") ;
 
 	// $(".gridO")[gridsz*gridsz - 1].classList.add("fa-arrow-up");
 }

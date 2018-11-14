@@ -15,12 +15,13 @@ def findMax(grid):
 def getGrid():
     if request.method == 'GET':
         gridcount = request.args["gridcount"]
+        scene = request.args["scene"]
         print(gridcount)
-        tmp = some.getGridDB(gridcount)
+        tmp = some.getGridDB(gridcount, scene)
         actions = json.loads(tmp[1])
         grid = json.loads(tmp[2])
-        print(max(grid))
-        return render_template('grid.html', gridcount = gridcount, actions = actions, grid = grid, max = findMax(grid))
+        print(grid, actions)
+        return render_template('grid.html', gridcount = gridcount, actions = actions, grid = grid, max = findMax(grid), scene = scene)
 
 @app.route('/survey')
 def rewardSubmit():
@@ -29,7 +30,8 @@ def rewardSubmit():
         time = request.args["time"]
         reward = request.args["reward"]
         actions = request.args["actions"]
-        some.insertSurvey(gridsz, actions, reward, time)
+        scene = request.args["scene"]
+        some.insertSurvey(gridsz, actions, reward, time, scene)
         return "1"
 
 @app.route('/show')
@@ -37,6 +39,7 @@ def getSurvey():
     if request.method == 'GET':
         gridsz = request.args["gridsz"]
         resp = some.showSurvey(gridsz)
+        print(resp)
         return render_template('survey.html', resp = resp)
 
 if __name__ == '__main__':

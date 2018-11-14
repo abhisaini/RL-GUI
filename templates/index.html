@@ -9,7 +9,22 @@
 	   <!-- <form action="http://localhost:5000/grid" method="get">
 		   <input type="text" name="gridcount">
 		   <input type="submit" > -->
-           <button onclick="window.location.href='http://alphago.pythonanywhere.com/grid?gridcount=10'" > Start </button>
+    <h1> RL Grid World </a>
+    <h3> Instructions </h3>
+    <ul>
+        <li>This is an instance of a grid world where every grid element has a value associated with it in which an agent has to get more one to other end by taking four actions: left, right, up and down. </li>
+        <li>The value of a grid element is represented in the form of Colors.  Darker the color of the grid element the more valuable it is.  </li>
+        <li> So, the problem is to reach the terminal point maximising the cumulative gain in minimum number of steps. </li>
+        <li>The following experiment is to know the difference between the optimal solution that there is and intuitive solutions found by humans.</li>
+        <li> If you visit a cell second time it will not count to total reward. </li>
+        <li> Once you reach the red end, data will be submitted automatically. You can exit then. </li>
+    </ul>
+    <br>
+    <button onclick="window.location.href='http://localhost:5000/grid?gridcount=10&&scene=1'" > Scenerio 1 </button> <br>
+    <button onclick="window.location.href='http://localhost:5000/grid?gridcount=10&&scene=2'" > Scenerio 2 </button> <br>
+    <button onclick="window.location.href='http://localhost:5000/grid?gridcount=10&&scene=3'" > Scenerio 3 </button> <br>
+    <button onclick="window.location.href='http://localhost:5000/grid?gridcount=10&&scene=4'" > Scenerio 4 </button> <br>
+    <button onclick="window.location.href='http://localhost:5000/grid?gridcount=10&&scene=5'" > Scenerio 5 </button> <br>
       <!-- <input type = "button" onclick = "sayHello()" value = "Say Hello" /> -->
    </body>
 
