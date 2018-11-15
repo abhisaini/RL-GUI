@@ -108,7 +108,7 @@ function checkEnd() {
                console.log( xhttp.responseText);
             }
         };
-        var url = "http://localhost:5000/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene;
+        var url = "http://alphago.pythonanywhere.com/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene;
         console.log(url);
         xhttp.open("GET", url , true);
         xhttp.send();
