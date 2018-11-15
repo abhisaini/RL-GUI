@@ -39,9 +39,13 @@ def getSurvey():
     if request.method == 'GET':
         gridsz = request.args["gridsz"]
         resp = some.showSurvey(gridsz)
-        print(resp)
+        # print(resp)
         return render_template('survey.html', resp = resp)
 
+@app.route('/calc')
+def getCalcs():
+    calcs = some.showCalcs()
+    return render_template('calcs.html', calcs = calcs)
 if __name__ == '__main__':
     app.use_reloader = True
     app.run(debug = True)

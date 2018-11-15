@@ -69,6 +69,7 @@ function color(i, j, gridsize, color, gtype, m){
     else {
 
         // console.log("GRID : ", grid.length, i, j, color);
+        console.log(i,j);
         grid[i * gridsize + j].style.background = "#e6c889" ;
 
     }
@@ -107,7 +108,7 @@ function checkEnd() {
                console.log( xhttp.responseText);
             }
         };
-        var url = "http://alphago.pythonanywhere.com/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene;
+        var url = "http://localhost:5000/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene;
         console.log(url);
         xhttp.open("GET", url , true);
         xhttp.send();
@@ -211,7 +212,7 @@ $(document).ready(function() {
 
 
 	createGrid(gridsz);
-    // createGridO(gridsz);
+    createGridO(gridsz);
 
 
 	color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
@@ -219,8 +220,8 @@ $(document).ready(function() {
     prev_x = x_coord, prev_y = y_coord;
     reward_total += myGrid[y_coord][x_coord];
     color(y_end ,x_end,gridsz, "#ea8d7a", ".grid");
-    // color(0,0,gridsz, "#e6c889", ".gridO");
-    // color(y_end, x_end,gridsz, "#e6c889", ".gridO");
+    color(0,0,gridsz, "#e6c889", ".gridO");
+    color(y_end, x_end,gridsz, "#e6c889", ".gridO");
 
 
 	Mousetrap.bind('up', function(e) {
@@ -253,7 +254,7 @@ $(document).ready(function() {
         // console.log(typeof this);
 	});
 
-    // makeActions(myacs);
+    makeActions(myacs);
 
 
 
