@@ -37,8 +37,12 @@ def rewardSubmit():
 @app.route('/show')
 def getSurvey():
     if request.method == 'GET':
+
+
         gridsz = request.args["gridsz"]
         resp = some.showSurvey(gridsz)
+        if "json" in request.args:
+            return json.dumps(resp)
         # print(resp)
         return render_template('survey.html', resp = resp)
 
