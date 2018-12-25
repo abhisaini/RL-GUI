@@ -194,9 +194,9 @@ def insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, rewa
     # ( survey_id ,reward_diff, pdiffs, scenerio, path_len)
     conn.commit()
     if rew_diff > 0.75 :
-        generate.updateTime(-1)
+        generate.updateTime(-1, scene)
     else:
-        generate.updateTime(1)
+        generate.updateTime(1, scene)
 
 
 

@@ -13,15 +13,15 @@ def generateGrid(gridcount, scene):
     # print( grid_nw ,actions)
     return grid_nw, actions
 
-def readtime():
+def readtime(scene):
     fl = open("time.json", "r").read()
-    return json.loads(fl)["time"]
+    return json.loads(fl)[scene]
 
-def updateTime(flag):
-    time = readtime()
+def updateTime(flag, scene):
+    fl = open("time.json", "r")
+    data = json.loads(fl.read())
+    fl.close()
     fl = open("time.json", "w")
-    data = {
-        "time" : time + flag * 10
-    }
+    data[scene] += flag * 10
     fl.write(json.dumps(data))
 # generateGrid(10, 1)

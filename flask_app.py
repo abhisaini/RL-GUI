@@ -18,7 +18,7 @@ def getGrid():
         scene = request.args["scene"]
         grid, actions = generate.generateGrid(gridcount, scene)
         return render_template('grid.html', gridcount = gridcount, actions = actions,
-         grid = grid, max = findMax(grid), scene = scene, timer = generate.readtime())
+         grid = grid, max = findMax(grid), scene = scene, timer = generate.readtime(scene))
 
 @app.route('/survey')
 def rewardSubmit():
