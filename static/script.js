@@ -87,6 +87,29 @@ function color(i, j, gridsize, color, gtype, m){
 
 }
 
+function submit_grid() {
+    time_end = new Date();
+    time_end = time_end.getTime();
+    var time_elapse = Math.round((time_end - time_beg) / 1000) ;
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function() {
+        if (this.readyState == 4 && this.status == 200) {
+           // Typical action to be performed when the document is ready:
+           console.log( xhttp.responseText);
+        }
+    };
+    var url = "http://alphago.pythonanywhere.com/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene
+        + "&&grid=" + JSON.stringify(myGrid) + "&&opt_action=" + JSON.stringify(myacs)
+         + "&&user_name=" + user_name + "&&user_roll=" + user_roll;
+    // console.log(url);
+    xhttp.open("GET", url , true);
+    xhttp.send();
+
+    alert("Cannot move now, reached the end.Exiting to previous page.");
+    console.log("end");
+    window.location = "/";
+    return 1;
+}
 
 function checkEnd() {
     if (x_coord == x_end && y_coord == y_end && endflag > 0){
@@ -97,26 +120,10 @@ function checkEnd() {
     else if (x_coord == x_end && y_coord == y_end && endflag == 0 ) {
         endflag = 1;
 
-        time_end = new Date();
-        time_end = time_end.getTime();
-        var time_elapse = Math.round((time_end - time_beg) / 1000) ;
 
-        var xhttp = new XMLHttpRequest();
-        xhttp.onreadystatechange = function() {
-            if (this.readyState == 4 && this.status == 200) {
-               // Typical action to be performed when the document is ready:
-               console.log( xhttp.responseText);
-            }
-        };
-        var url = "http://alphago.pythonanywhere.com/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene;
-        console.log(url);
-        xhttp.open("GET", url , true);
-        xhttp.send();
+        submit_grid();
 
-        alert("Cannot move now, reached the end.Exiting to previous page.");
-        console.log("end");
-        window.location = "/";
-        return 1;
+
     }
     return 0;
 }
@@ -254,7 +261,7 @@ $(document).ready(function() {
         // console.log(typeof this);
 	});
 
-    makeActions(myacs);
+    // makeActions(myacs);
 
 
 
@@ -295,6 +302,22 @@ function switchMy() {
     $("#containerO").hide();
     $("#left-foot").removeClass("active");
     $("#right-foot").addClass("active");
+
+}
+
+
+
+
+var user_name, user_roll ;
+function getInfo() {
+    var form_modal = document.getElementById('myModal');
+    form_modal.style.display = "none";
+    var gridworld = document.getElementById('gridworld');
+    ctd_timer();
+    gridworld.style.display = "block";
+    user_name = document.getElementById('user_name').value;
+    user_roll = document.getElementById('user_roll').value;
+
 
 }
 // document.getElementById('container').style.visiblity = "hidden";

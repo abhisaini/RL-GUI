@@ -1,6 +1,6 @@
 from flask import Flask, render_template, request
 app = Flask(__name__)
-import some, json
+import some, json, generate
 @app.route('/')
 def index():
    return render_template('index.html')
@@ -16,22 +16,25 @@ def getGrid():
     if request.method == 'GET':
         gridcount = request.args["gridcount"]
         scene = request.args["scene"]
-        print(gridcount)
-        tmp = some.getGridDB(gridcount, scene)
-        actions = json.loads(tmp[1])
-        grid = json.loads(tmp[2])
-        print(grid, actions)
-        return render_template('grid.html', gridcount = gridcount, actions = actions, grid = grid, max = findMax(grid), scene = scene)
+        grid, actions = generate.generateGrid(gridcount, scene)
+        return render_template('grid.html', gridcount = gridcount, actions = actions,
+         grid = grid, max = findMax(grid), scene = scene, timer = generate.readtime())
 
 @app.route('/survey')
 def rewardSubmit():
     if request.method == 'GET':
+
+        user_name = request.args["user_name"]
+        user_roll = request.args["user_roll"]
+        grid = request.args["grid"]
+        opt_action = request.args["opt_action"]
         gridsz = request.args["gridsz"]
+        scene = request.args["scene"]
+        # some.insertDB(gridsz, grid, opt_action, scene)
         time = request.args["time"]
         reward = request.args["reward"]
         actions = request.args["actions"]
-        scene = request.args["scene"]
-        some.insertSurvey(gridsz, actions, reward, time, scene)
+        some.insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, reward, time, scene)
         return "1"
 
 @app.route('/show')

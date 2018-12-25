@@ -1,44 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <title>Bootstrap Example</title>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<title>Bootstrap Example</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 </head>
+
 <body>
 
-<div class="container">
-  <h2>Calculations</h2>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>Reward Diff</th>
-		<th>Distance Diff Per Step</th>
-		<th> Path Length Diff </th>
-		<th>Scenerio </th>
-		<th>Survey ID</th>
+	<div class="container">
+		<h2>Calculations</h2>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Survey ID</th>
+                    <th>Name</th>
+                    <th>Rol No</th>
+					<th>Reward Diff</th>
+					<th>Distance Diff Per Step</th>
+					<th> Path Length Diff </th>
+					<th>Scenerio </th>
 
-      </tr>
-    </thead>
-    <tbody>
-		{% for x in calcs %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for x in calcs %}
 
-      <tr>
-		  <td>{{x[1]}}</td>
-		  <td>{{x[2]}}</td>
-		  <td> {{x[4]}} </td>
-		  <td>{{x[3]}}</td>
-		  <td>{{x[0]}}</td>
+				<tr>
+					<td>{{x[0]}}</td>
+					<td>{{x[1]}}</td>
+					<td>{{x[2]}}</td>
+                    <td>{{x[3]}}</td>
+                    <td> {{x[4]}} </td>
+                    <td> {{x[6]}} </td>
+                    <td> {{x[5]}} </td>
 
-      </tr>
-	  {% endfor %}
+				</tr>
+				{% endfor %}
 
-    </tbody>
-  </table>
-</div>
+			</tbody>
+		</table>
+	</div>
 
 </body>
+
 </html>

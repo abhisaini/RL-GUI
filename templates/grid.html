@@ -17,13 +17,46 @@
 
 	<!-- <center><button class="newGrid">New Grid</button></center> -->
 
+
+	<div id="myModal" class="modal">
+
+	  <!-- Modal content -->
+	  <div class="modal-content">
+
+		  <h1 style="color:rgb(50,50,50); "> User Info </h1>
+		  <hr style="color:lightgrey">
+
+		  <form onsubmit="getInfo(); return false;">
+		    <label for="fname"> Name</label>
+		    <input type="text" id="user_name" placeholder="Your name.." required>
+
+		    <label for="lname"> Roll Number</label>
+		    <input type="text" id="user_roll"  placeholder="Your roll no.." required>
+		    <button  id="submitbtn"> Start </button>
+			<p> <strong> Note : </strong> The episode will start as soon as you click the Start button </p>
+		  </form>
+
+
+	    <!-- <span class="close">&times;</span>
+	    <p>Some text in the Modal..</p> -->
+	  </div>
+
+	</div>
+
+<div id="gridworld" style="display:none;">
+	<div id = "timer-container">
+		<div id="myProgress">
+		  <div id="myBar"></div>
+		</div>
+		<p id = "countdowntimer" style="text-align:center;"> </p>
+	</div>
 	<div id="container"></div>
 
 	<br><br>
 	<div style="text-align:center;width:480px;	margin:auto;margin-top : 70px;" id="controller">
 		<button id="up" >UP</button><br><br>
-		<button id="left" >LEFT</button>
-		<button id="right" >RIGHT</button><br><br>
+		<button id="left" style="margin-right:30px;">LEFT</button>
+		<button id="right"  style="margin-left:30px;">RIGHT</button><br><br>
 		<button id="down" >DOWN</button>
 	</div>
 
@@ -31,12 +64,11 @@
 
 	<div id="containerO"></div>
 
-	<div id="footer">
-		<!-- <div id="left-foot" > Optimal Grid </div> -->
+	<!-- <div id="footer">
 		 <div id="left-foot" onclick="switchOpt()"> Optimal Grid </div>
 		 <div id="right-foot" onclick="switchMy()">My Grid </div>
-	</div>
-
+	</div> -->
+</div>
 </body>
 <script>
 gridsz = {{gridcount}};
@@ -80,6 +112,25 @@ switch (scene) {
 	default:
 
 }
+
+function ctd_timer() {
+	var timeleft = {{timer}} + 1;
+	var elem = document.getElementById("myBar");
+    var downloadTimer = setInterval(function(){
+    timeleft--;
+    document.getElementById("countdowntimer").textContent = timeleft + ' secs left';
+    if(timeleft <= 0){
+		clearInterval(downloadTimer);
+		submit_grid();
+	}
+
+	elem.style.width = (120 * timeleft / {{timer}}) + 'px' ;
+    },1000);
+}
+
+
+
+
 // makeActions(myacs);
 // var movesaaa = [moveUp, moveRight, moveDown, moveLeft];
 // movesaaa[2]();
