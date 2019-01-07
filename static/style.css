@@ -173,24 +173,48 @@ input[type=text], select {
   cursor: pointer;
 }
 
+@keyframes blinker {
+	0% {
+      opacity: 1;
+    }
+	25%{
+  	  opacity: 0.5;
+    }
+	50% {
+      opacity: 0;
+    }
+    75%{
+  	  opacity: 0.5;
+    }
+
+    100%{
+  	  opacity: 1;
+    }
+}
+
+
 #timer-container{
 	position: fixed;
 	right: 20px;
     top: 20px;
-	padding: 20px;
+	padding: 25px;
 	border-style: solid;
+	font-size: 20px;
 	border-width: 1px;
 	background-color: rgba(240,240,240);
-}
+	opacity: 1;
+
+  animation: blinker 2s step-start infinite;}
+
 
 #myProgress {
-  width: 120px;
+  width: 250px;
   background-color: #ddd;
 }
 
 #myBar {
-  width: 120px;
-  height: 30px;
+  width: 250px;
+  height: 40px;
   background-color: #4CAF50;
 }
 

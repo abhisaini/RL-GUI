@@ -114,7 +114,8 @@ switch (scene) {
 }
 
 function ctd_timer() {
-	var timeleft = {{timer}} + 1;
+	var timeleft = 200+ {{timer}} + 1;
+	var time = {{timer}} + 200;
 	var elem = document.getElementById("myBar");
     var downloadTimer = setInterval(function(){
     timeleft--;
@@ -124,7 +125,7 @@ function ctd_timer() {
 		submit_grid();
 	}
 
-	elem.style.width = (120 * timeleft / {{timer}}) + 'px' ;
+	elem.style.width = (250 * timeleft / time) + 'px' ;
     },1000);
 }
 
