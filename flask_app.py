@@ -5,6 +5,11 @@ import some, json, generate
 def index():
    return render_template('index.html')
 
+@app.route('/demo')
+def demo():
+   return render_template('demo.html')
+
+
 def findMax(grid):
     mx = 0.0
     for i in grid:
@@ -34,7 +39,8 @@ def rewardSubmit():
         time = request.args["time"]
         reward = request.args["reward"]
         actions = request.args["actions"]
-        some.insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, reward, time, scene)
+        timeg = request.args["tg"]
+        some.insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, reward, time, timeg, scene)
         return "1"
 
 @app.route('/show')

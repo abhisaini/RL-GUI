@@ -1,4 +1,5 @@
 // function that builds a grid in the "container"
+var tg;
 var x_coord , y_coord, gridsz , prev_x , prev_y ;
 var reward_total = 0.0;
 var myPath = [];
@@ -98,9 +99,9 @@ function submit_grid() {
            console.log( xhttp.responseText);
         }
     };
-    var url = "http://alphago.pythonanywhere.com/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene
+    var url = "/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene
         + "&&grid=" + JSON.stringify(myGrid) + "&&opt_action=" + JSON.stringify(myacs)
-         + "&&user_name=" + user_name + "&&user_roll=" + user_roll;
+         + "&&user_name=" + user_name + "&&user_roll=" + user_roll + "&&tg=" + tg;
     // console.log(url);
     xhttp.open("GET", url , true);
     xhttp.send();

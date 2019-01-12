@@ -175,7 +175,7 @@ def getAVG(p):
     return PD/ctr, DDPS/ctr, RW/ctr
 
 
-def insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, reward, time, scene):
+def insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, reward, time, timeg, scene):
 
     # # print(getCoordis(s0[2], s0[5]))
     mycoords = getCoordis(json.loads(actions), int(scene))
@@ -189,8 +189,8 @@ def insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, rewa
     plen_diff =  len(grid_coords) - len(mycoords)
     conn = sqlite3.connect('database.db')
     cur = conn.cursor()
-    cur.execute("INSERT INTO calcs (name, roll_no, reward_diff, pdiffs, scenerio, path_len) VALUES (?,?,?,?,?,?)",
-    (user_name, user_roll, rew_diff, pdf/ plen, scene, plen_diff) )
+    cur.execute("INSERT INTO calcs (name, roll_no, reward_diff, pdiffs, scenerio, path_len, time_taken, time_given ) VALUES (?,?,?,?,?,?,?,?)",
+    (user_name, user_roll, rew_diff, pdf/ plen, scene, plen_diff, time, timeg) )
     # ( survey_id ,reward_diff, pdiffs, scenerio, path_len)
     conn.commit()
     if rew_diff > 0.75 :
