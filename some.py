@@ -1,7 +1,7 @@
-
 import sqlite3
 import json, generate
 # from # # print import # # print
+# up:0 down:1 right:2 left:3
 def getCoordis(path, scene):
     if scene == 1:
         x_c = 0
@@ -183,7 +183,9 @@ def insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, rewa
 
     pdf = compPath(mycoords, grid_coords)
     plen = len(json.loads(actions))
-    rew_diff = (float(reward) - plen * plen * 0.5 * 0.1) /  getRew(json.loads(grid), json.loads(opt_action), int(scene))
+    olen = len(json.loads(opt_action))
+    rew_diff = (float(reward) - plen * plen * 0.5 * 0.1) /  (getRew(json.loads(grid), json.loads(opt_action), int(scene)) - olen * olen * 0.05)
+    print("%\n" * 10, olen, getRew(json.loads(grid), json.loads(opt_action), int(scene)), float(reward) )
     # printq("curr : ", (reward - plen * plen * 0.5 * 0.1), " || ", getRew(grid, opt_action, scene))
     # print("curr : ", str( s0[3] - plen * plen * 0.5 * 0.1),  " || opt : ", str(grid_rew[s0[5]]))
     plen_diff =  len(grid_coords) - len(mycoords)

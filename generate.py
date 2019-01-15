@@ -23,5 +23,7 @@ def updateTime(flag, scene):
     fl.close()
     fl = open("time.json", "w")
     data[scene] += flag * 10
+    if(data[scene] < 10):
+        data[scene] = 10
     fl.write(json.dumps(data))
 # generateGrid(10, 1)

@@ -4,8 +4,7 @@ var x_coord , y_coord, gridsz , prev_x , prev_y ;
 var reward_total = 0.0;
 var myPath = [];
 var endflag = 0;
-var time_beg = new Date(), time_end;
-time_beg = time_beg.getTime();
+var time_beg , time_end;
 // #9c412e dark red
 function createGrid(x) {
     for (var rows = 0; rows < x; rows++) {
@@ -92,6 +91,7 @@ function submit_grid() {
     time_end = new Date();
     time_end = time_end.getTime();
     var time_elapse = Math.round((time_end - time_beg) / 1000) ;
+    console.log(time_elapse);
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
         if (this.readyState == 4 && this.status == 200) {
@@ -318,7 +318,8 @@ function getInfo() {
     gridworld.style.display = "block";
     user_name = document.getElementById('user_name').value;
     user_roll = document.getElementById('user_roll').value;
-
+    time_beg = new Date();
+    time_beg = time_beg.getTime();
 
 }
 // document.getElementById('container').style.visiblity = "hidden";
