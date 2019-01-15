@@ -1,1 +1,5 @@
 __pycache__/flask_app.cpython-35.pyc
+database.db
+surveys_raw.json
+time.json
+un_calc.txt
