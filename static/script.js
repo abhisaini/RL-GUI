@@ -3,9 +3,9 @@ var tg;
 var x_coord , y_coord, gridsz , prev_x , prev_y ;
 var reward_total = 0.0;
 var myPath = [];
-var grid_cpy;
 var endflag = 0;
 var time_beg , time_end;
+var grid_cpy;
 // #9c412e dark red
 function createGrid(x) {
     for (var rows = 0; rows < x; rows++) {
@@ -142,6 +142,7 @@ function moveUp() {
             myPath.push(0);
     		y_coord --;
             reward_total += myGrid[y_coord][x_coord] ;
+            console.log( myGrid[y_coord][x_coord], reward_total);
             myGrid[y_coord][x_coord] = 0;
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
@@ -163,11 +164,14 @@ function moveDown() {
             myPath.push(1);
     		y_coord ++;
             reward_total += myGrid[y_coord][x_coord] ;
-	    myGrid[y_coord][x_coord] = 0;
+      console.log( myGrid[y_coord][x_coord], reward_total);
+      myGrid[y_coord][x_coord] = 0;
+
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
             color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
             prev_x = x_coord, prev_y = y_coord;
+            // console.log(grid_cpy[y_coord][x_coord])
             checkEnd();
         }
     }
@@ -183,7 +187,9 @@ function moveRight() {
             myPath.push(2);
     		x_coord ++;
             reward_total += myGrid[y_coord][x_coord] ;
-	    myGrid[y_coord][x_coord] = 0;
+      console.log( myGrid[y_coord][x_coord], reward_total);
+      myGrid[y_coord][x_coord] = 0;
+
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
             color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
@@ -204,7 +210,9 @@ function moveLeft() {
             myPath.push(3);
     		x_coord --;
             reward_total += myGrid[y_coord][x_coord] ;
+            console.log( myGrid[y_coord][x_coord], reward_total);
 	    myGrid[y_coord][x_coord] = 0;
+
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
             color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
@@ -231,6 +239,8 @@ $(document).ready(function() {
     // console.log("aaa : ", y_coord ,x_coord);
     prev_x = x_coord, prev_y = y_coord;
     reward_total += myGrid[y_coord][x_coord];
+    myGrid[y_coord][x_coord] = 0;
+    console.log("ssssss ",grid_cpy);
     color(y_end ,x_end,gridsz, "#ea8d7a", ".grid");
     color(0,0,gridsz, "#e6c889", ".gridO");
     color(y_end, x_end,gridsz, "#e6c889", ".gridO");
