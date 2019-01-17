@@ -162,6 +162,7 @@ function moveDown() {
             myPath.push(1);
     		y_coord ++;
             reward_total += myGrid[y_coord][x_coord] ;
+	    myGrid[y_coord][x_coord] = 0;
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
             color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
@@ -181,6 +182,7 @@ function moveRight() {
             myPath.push(2);
     		x_coord ++;
             reward_total += myGrid[y_coord][x_coord] ;
+	    myGrid[y_coord][x_coord] = 0;
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
             color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
@@ -201,6 +203,7 @@ function moveLeft() {
             myPath.push(3);
     		x_coord --;
             reward_total += myGrid[y_coord][x_coord] ;
+	    myGrid[y_coord][x_coord] = 0;
             // console.log(myGrid[y_coord][x_coord]);
             color(y_coord ,x_coord ,gridsz, "#98e778", ".grid");
             color(prev_y ,prev_x ,gridsz, "#81bdf6", ".grid");
