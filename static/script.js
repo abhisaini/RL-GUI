@@ -3,6 +3,7 @@ var tg;
 var x_coord , y_coord, gridsz , prev_x , prev_y ;
 var reward_total = 0.0;
 var myPath = [];
+var grid_cpy;
 var endflag = 0;
 var time_beg , time_end;
 // #9c412e dark red
@@ -100,7 +101,7 @@ function submit_grid() {
         }
     };
     var url = "/survey?gridsz=" + gridsz + "&&actions=" + JSON.stringify(myPath) + "&&time=" + time_elapse + "&&reward=" + reward_total + "&&scene=" + scene
-        + "&&grid=" + JSON.stringify(myGrid) + "&&opt_action=" + JSON.stringify(myacs)
+        + "&&grid=" + JSON.stringify(grid_cpy) + "&&opt_action=" + JSON.stringify(myacs)
          + "&&user_name=" + user_name + "&&user_roll=" + user_roll + "&&tg=" + tg;
     // console.log(url);
     xhttp.open("GET", url , true);
