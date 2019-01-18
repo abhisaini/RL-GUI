@@ -42,15 +42,15 @@ def rewardSubmit():
         timeg = request.args["tg"]
         print(request.args.to_dict(flat=False))
 
-        fl = open("surveys_raw.json", "r")
-        data = json.loads(fl.read())
-        print(5 * "*\n", data, 5 * "*\n")
-        fl.close()
-        fl = open("surveys_raw.json", "w")
-        data += [request.args.to_dict(flat=False)]
-        print(5 * "*\n", data, 5 * "*\n")
-        fl.write(json.dumps(data))
-        fl.close()
+        # fl = open("surveys_raw.json", "r")
+        # data = json.loads(fl.read())
+        # print(5 * "*\n", data, 5 * "*\n")
+        # fl.close()
+        # fl = open("surveys_raw.json", "w")
+        # data += [request.args.to_dict(flat=False)]
+        # print(5 * "*\n", data, 5 * "*\n")
+        # fl.write(json.dumps(data))
+        # fl.close()
         some.insertCalc_new(user_name, user_roll, grid, opt_action, gridsz, actions, reward, time, timeg, scene)
         return "1"
 
